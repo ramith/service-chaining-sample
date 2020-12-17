@@ -2,7 +2,7 @@ import ballerina/http;
 
 service http:Service /employee on new http:Listener(9090) {
     resource function get [string employeeId] (http:Caller caller, http:Request req) returns error? {
-        http:Client clientEP = new ("http://localhost:9091");
+        http:Client clientEP = new ("http://samples.choreoapps.dev");
         var response = checkpanic clientEP->get("/company/hr/employee/" + <@untainted>employeeId);
         if response is http:Response && response.statusCode == http:STATUS_NOT_FOUND {
             checkpanic caller->respond(http:STATUS_NOT_FOUND);
